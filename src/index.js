@@ -8,7 +8,7 @@ const PORT = process.env.PORT
 app.use(express.json())
 app.get('/', (res, req) => {
     console.log(tes)
-    res.send('hello world!')
+    res.send('hello, world!')
 })
 const authController = require('./auth/auth.controller')
 app.use('/api/auth', authController)
