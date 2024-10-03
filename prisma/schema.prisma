@@ -1,0 +1,67 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId        Int            @id @default(autoincrement())
+  username      String         @unique
+  email         String         @unique
+  password      String
+  role          Role           @default(WH_OPERATOR)
+  createdAt     DateTime       @default(now())
+  spk           SPK[]
+  notifications Notification[]
+}
+
+enum Role {
+  PH_OPERATOR
+  WH_OPERATOR
+}
+
+model Material {
+  materialId   Int            @id @default(autoincrement())
+  name         String         @unique
+  descriptions String?
+  quantity     Int
+  status       StatusMaterial @default(UNAVAILABLE)
+  createdAt    DateTime       @default(now())
+  spk          SPK[]
+}
+
+enum StatusMaterial {
+  AVAILABLE
+  UNAVAILABLE
+}
+
+model SPK {
+  spkId      Int       @id @default(autoincrement())
+  userId     Int
+  materialId Int
+  status     StatusSPK @default(PENDING)
+  createdAt  DateTime  @default(now())
+
+  user     User     @relation(fields: [userId], references: [userId])
+  material Material @relation(fields: [materialId], references: [materialId])
+}
+
+enum StatusSPK {
+  PENDING
+  ON_PROCESS
+  DONE
+}
+
+model Notification {
+  notifId   Int      @id @default(autoincrement())
+  userId    Int
+  message   String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [userId])
+}
