@@ -11,7 +11,10 @@ app.get('/', (res, req) => {
     res.send('helo world')
 })
 const authController = require('./auth/auth.controller')
+const materialController = require('./material/material.controller')
+
 app.use('/api/auth', authController)
+app.use('/api/materials', materialController)
 
 app.listen(PORT, () => {
     console.log('server berjalan' + PORT)
