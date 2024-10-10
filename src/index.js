@@ -12,10 +12,12 @@ app.get('/', (res, req) => {
 })
 const authController = require('./auth/auth.controller')
 const materialController = require('./material/material.controller')
+const spkController = require('./spk/spk.controller')
 const userController = require('./user/user.controller')
 
 app.use('/api/auth', authController)
 app.use('/api/materials', materialController)
+app.use('/api/spk', spkController)
 app.use('/api/user', userController)
 
 app.listen(PORT, () => {
