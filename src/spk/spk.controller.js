@@ -34,7 +34,7 @@ router.get('/user', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const { spkId } = req.params.id
+        const spkId = req.params.id
         const spkByMaterial = await spkService.getSpkById(spkId)
         res.status(200).json(spkByMaterial)
     } catch (e) {

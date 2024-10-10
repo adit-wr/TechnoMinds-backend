@@ -46,16 +46,15 @@ const findSpkByUser = async (userId) => {
     }
 }
 
-const findSpkById = async (id) => {
+const findSpkById = async (ids) => {
     try {
         const spkById = await prisma.sPK.findUnique({
             where: {
-                spkId: parseInt(id)
+                spkId: parseInt(ids)
             }
         })
         return spkById
     } catch (error) {
-        console.log(error)
         throw new Error('SPK by id not found')
     }
 }
