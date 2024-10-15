@@ -1,8 +1,10 @@
 const express = require('express');
-const router = express.Router();
 const { createMaterial, getAllMaterials, getMaterialById, editMaterialById, deleteMaterialById } = require('./material.service');
+const authorizeJWT = require('../middleware/authorizeJWT')
+const adminAuthorization = require('../middleware/adminAuthorization')
+const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/', adminAuthorization, async (req, res) => {
     try {
         const newMaterialData = req.body;
         const newMaterial = await createMaterial(newMaterialData);
@@ -12,7 +14,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/', async (req, res) => {
+router.get('/', authorizeJWT, async (req, res) => {
     try {
         const materials = await getAllMaterials();
         res.status(200).send(materials);
@@ -21,7 +23,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', authorizeJWT, async (req, res) => {
     try {
         const materialId = parseInt(req.params.id);
         const material = await getMaterialById(materialId);
@@ -31,7 +33,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', adminAuthorization, async (req, res) => {
     try {
         const materialId = req.params.id;
         const materialData = req.body;
@@ -42,7 +44,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', adminAuthorization, async (req, res) => {
     try {
         const materialId = req.params.id;
         await deleteMaterialById(materialId);

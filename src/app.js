@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const dotenv = require('dotenv')
+const adminAuthorization = require('./middleware/adminAuthorization')
 dotenv.config()
 const PORT = process.env.PORT
 
@@ -18,7 +19,7 @@ const userController = require('./user/user.controller')
 app.use('/api/auth', authController)
 app.use('/api/materials', materialController)
 app.use('/api/spk', spkController)
-app.use('/api/user', userController)
+app.use('/api/user', adminAuthorization, userController)
 
 app.listen(PORT, () => {
     console.log('server berjalan port : ' + PORT)
