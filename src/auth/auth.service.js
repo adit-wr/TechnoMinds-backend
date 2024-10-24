@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const getnerateToken = async (user) => {
 
     return jwt.sign({
-        userId: user.id,
+        userId: user.userId,
         username: user.username,
         email: user.email,
         role: user.role
