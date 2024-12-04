@@ -56,5 +56,6 @@ module.exports = {
     getSpkByUser,
     getSpkById,
     getAllSPK,
-    updateStatusSpk
+    updateStatusSpk,
+    verifySpk
 }
