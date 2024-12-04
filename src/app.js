@@ -1,12 +1,10 @@
 const express = require('express')
 const app = express()
 const dotenv = require('dotenv')
-const cors = require('cors')
 const adminAuthorization = require('./middleware/adminAuthorization')
 dotenv.config()
 
 app.use(express.json())
-app.use(cors())
 app.get('/', (res, req) => {
     console.log(tes)
     res.send('helo world')
