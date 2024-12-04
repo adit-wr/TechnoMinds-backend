@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "vercel-build": "prisma generate"
   },
   "dependencies": {
