@@ -1,12 +1,12 @@
 const express = require('express')
 const app = express()
 const dotenv = require('dotenv')
+const cors = require('cors')
 const adminAuthorization = require('./middleware/adminAuthorization')
 dotenv.config()
-const PORT = process.env.PORT
-
 
 app.use(express.json())
+app.use(cors())
 app.get('/', (res, req) => {
     console.log(tes)
     res.send('helo world')
@@ -21,6 +21,4 @@ app.use('/api/materials', materialController)
 app.use('/api/spk', spkController)
 app.use('/api/user', adminAuthorization, userController)
 
-app.listen(PORT, () => {
-    console.log('server berjalan port : ' + PORT)
-})
+export default app;
