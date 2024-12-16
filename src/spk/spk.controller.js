@@ -22,7 +22,7 @@ router.post('/', authorizeJWT, upload.single('file') , async (req, res) => {
         // const userId = req.userId
         const { userId, penerima } = req.body
         const file = req.file ? req.file.path : null
-        const newSpk = await spkService.createSpk(userId, penerima)
+        const newSpk = await spkService.createSpk(userId,file, penerima)
         res.status(201).json(newSpk)
     } catch (e) {
         res.status(400).json({ message: e.message })
