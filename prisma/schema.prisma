@@ -32,7 +32,7 @@ model Material {
   quantity     Int
   status       StatusMaterial @default(UNAVAILABLE)
   createdAt    DateTime       @default(now())
-  spk          SPK[]
+  // spk          SPK[]
 }
 
 enum StatusMaterial {
@@ -43,12 +43,15 @@ enum StatusMaterial {
 model SPK {
   spkId      Int       @id @default(autoincrement())
   userId     Int
-  materialId Int
+  // materialId Int
+  file String?
+  tanggal_pengajuan DateTime
+  penerima String
   status     StatusSPK @default(PENDING)
   createdAt  DateTime  @default(now())
 
   user     User     @relation(fields: [userId], references: [userId])
-  material Material @relation(fields: [materialId], references: [materialId])
+  // material Material @relation(fields: [materialId], references: [materialId])
 }
 
 enum StatusSPK {

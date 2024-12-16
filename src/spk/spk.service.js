@@ -1,8 +1,8 @@
 
 const spkRepository = require('./spk.repository')
 
-const createSpk = async (userId, materialId, description) => {
-    const spk = await spkRepository.insertSPK(userId, materialId, description)
+const createSpk = async (userId, file,penerima) => {
+    const spk = await spkRepository.insertSPK(userId, file,penerima)
     return spk
 }
 

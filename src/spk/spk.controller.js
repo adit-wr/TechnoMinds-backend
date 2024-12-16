@@ -4,11 +4,25 @@ const spkService = require('./spk.service')
 const authorizeJWT = require('../middleware/authorizeJWT')
 const adminAuthorization = require('../middleware/adminAuthorization')
 
-router.post('/', authorizeJWT, async (req, res) => {
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination:(req,file,cs) =>{
+        cb(null,'./uploads') //folder tempat menyimpan file
+    },
+    filename:(req,file,cb)=>{
+        cb(null,Date.now() + '-' + file.originalname) //nama file unik
+    }
+})
+
+const upload = multer({storage})
+
+router.post('/', authorizeJWT, upload.single('file') , async (req, res) => {
     try {
         // const userId = req.userId
-        const { userId, materialId, description } = req.body
-        const newSpk = await spkService.createSpk(userId, materialId, description)
+        const { userId, penerima } = req.body
+        const file = req.file ? req.file.path : null
+        const newSpk = await spkService.createSpk(userId, penerima)
         res.status(201).json(newSpk)
     } catch (e) {
         res.status(400).json({ message: e.message })

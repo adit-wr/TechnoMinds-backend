@@ -1,13 +1,14 @@
 const prisma = require('../db')
 
-const insertSPK = async (userId, materialId, description) => {
+const insertSPK = async (userId, file, penerima) => {
     try {
         const newSPK = await prisma.sPK.create({
             data: {
                 userId,
                 materialId,
                 description,
-                status: "PENDING"
+                status: "PENDING",
+                tanggal_pengajuan : new Date()
             }
         })
         return newSPK
@@ -81,6 +82,8 @@ const updateSpkStatus = async (spkId, status, timeStampField) => {
         throw new Error('failed to update spk status');
     }
 };
+
+
 
 module.exports = {
     insertSPK,
