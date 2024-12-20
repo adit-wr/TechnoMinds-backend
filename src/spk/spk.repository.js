@@ -5,8 +5,8 @@ const insertSPK = async (userId, file, penerima) => {
         const newSPK = await prisma.sPK.create({
             data: {
                 userId,
-                materialId,
-                description,
+                file,
+                penerima,
                 status: "PENDING",
                 tanggal_pengajuan : new Date()
             }

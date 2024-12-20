@@ -3,9 +3,9 @@ const router = express.Router()
 const authService = require('./auth.service')
 
 router.post('/register', async (req, res, next) => {
-    const { username, email, password } = req.body
+    const { username,email,password } = req.body
     try {
-        const newUser = await authService.register(username, email, password)
+        const newUser = await authService.register(username,email,password)
         res.status(201).json({
             data: {
                 username: newUser.username,

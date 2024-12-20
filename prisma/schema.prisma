@@ -41,16 +41,16 @@ enum StatusMaterial {
 }
 
 model SPK {
-  spkId      Int       @id @default(autoincrement())
-  userId     Int
+  spkId             Int       @id @default(autoincrement())
+  userId            Int
   // materialId Int
-  file String?
+  file              String?
   tanggal_pengajuan DateTime
-  penerima String
-  status     StatusSPK @default(PENDING)
-  createdAt  DateTime  @default(now())
+  penerima          String
+  status            StatusSPK @default(PENDING)
+  createdAt         DateTime  @default(now())
 
-  user     User     @relation(fields: [userId], references: [userId])
+  user User @relation(fields: [userId], references: [userId])
   // material Material @relation(fields: [materialId], references: [materialId])
 }
 

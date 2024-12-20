@@ -7,7 +7,7 @@ const adminAuthorization = require('../middleware/adminAuthorization')
 const multer = require('multer')
 
 const storage = multer.diskStorage({
-    destination:(req,file,cs) =>{
+    destination:(req,file,cb) =>{
         cb(null,'./uploads') //folder tempat menyimpan file
     },
     filename:(req,file,cb)=>{

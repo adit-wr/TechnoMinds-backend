@@ -4,6 +4,11 @@ const dotenv = require('dotenv');
 const PORT = process.env.PORT ;
 dotenv.config();
 
+const cors = require('cors')
+
+app.use(cors())
+
+
 const adminAuthorization = require('./middleware/adminAuthorization');
 app.use('/uploads', express.static('uploads'))
 app.use(express.json());
