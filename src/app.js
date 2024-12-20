@@ -1,17 +1,14 @@
 const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
-const PORT = process.env.PORT ;
 dotenv.config();
-
+const PORT = process.env.PORT ;
+const adminAuthorization = require('./middleware/adminAuthorization');
 const cors = require('cors')
 
-app.use(cors())
-
-
-const adminAuthorization = require('./middleware/adminAuthorization');
-app.use('/uploads', express.static('uploads'))
+// app.use('/uploads', express.static('uploads'))
 app.use(express.json());
+app.use(cors())
 app.get('/', (res, req) => {
     console.log(tes)
     res.send('helo world')
