@@ -15,9 +15,16 @@ model User {
   email         String         @unique
   password      String
   role          Role           @default(WH_OPERATOR)
+  status        UserStatus     @default(FREE)
   createdAt     DateTime       @default(now())
   spk           SPK[]
   notifications Notification[]
+}
+
+enum UserStatus {
+  FREE
+  OFF
+  ON_DUTY
 }
 
 enum Role {
@@ -32,7 +39,7 @@ model Material {
   quantity     Int
   status       StatusMaterial @default(UNAVAILABLE)
   createdAt    DateTime       @default(now())
-  // spk          SPK[]
+  spk          SPK[]
 }
 
 enum StatusMaterial {
@@ -43,15 +50,15 @@ enum StatusMaterial {
 model SPK {
   spkId             Int       @id @default(autoincrement())
   userId            Int
-  // materialId Int
-  file              String?
-  tanggal_pengajuan DateTime
+  materialId        Int
+  quantityOrder     Int
+  tanggal_pengajuan DateTime @default(now())
   penerima          String
   status            StatusSPK @default(PENDING)
   createdAt         DateTime  @default(now())
 
-  user User @relation(fields: [userId], references: [userId])
-  // material Material @relation(fields: [materialId], references: [materialId])
+  user     User     @relation(fields: [userId], references: [userId])
+  material Material @relation(fields: [materialId], references: [materialId])
 }
 
 enum StatusSPK {
