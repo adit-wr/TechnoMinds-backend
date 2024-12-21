@@ -40,10 +40,11 @@ const editUser = async (id, userData) => {
             userId: parseInt(id)
         },
         data: {
-            username: userData.username,
-            email: userData.email,
-            password: userData.password,
-            role: userData.role
+            // username: userData.username,
+            // email: userData.email,
+            // password: userData.password,
+            // role: userData.role,
+            status: userData.status
         }
     })
     return user
