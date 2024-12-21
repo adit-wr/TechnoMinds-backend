@@ -1,7 +1,22 @@
 
 const spkRepository = require('./spk.repository')
 
+getFreeWHOPerators = async()=>{
+    const freeOperators = await spkRepository.findFreeWHOperators()
+    if(!freeOperators.length){
+        throw new Error('No free WH Operators found')
+    }
+    return freeOperators
+}
+
 const createSpk = async (userId, materialId,quantityOrder,penerima) => {
+    // validasi penerima
+    const freeOperators = await spkRepository.findFreeWHOperators();
+    console.log(freeOperators)
+    const isValidasiOperators = freeOperators.some(user => user.userId === parseInt(penerima))
+    if(!isValidasiOperators){
+        throw new Error('Selected penerima is not valid or not free')
+    }
     const spk = await spkRepository.insertSPK(userId, materialId,quantityOrder,penerima)
     return spk
 }
@@ -57,5 +72,6 @@ module.exports = {
     getSpkById,
     getAllSPK,
     updateStatusSpk,
-    verifySpk
+    verifySpk,
+    getFreeWHOPerators
 }

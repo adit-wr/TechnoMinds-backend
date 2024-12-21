@@ -1,5 +1,30 @@
 const prisma = require('../db')
 
+const findFreeWHOperators = async()=>{
+    try{
+        const freeOperators = await prisma.user.findMany({
+            where:{
+                role:'WH_OPERATOR',
+                spk:{
+                    none:{
+                        status:{
+                           in: ['PENDING' || 'ON_PROCESS']
+                        } 
+                    }
+                }
+            },
+            select:{
+                userId:true,
+                username:true,
+            }
+        });
+        return freeOperators;
+    }catch(error){
+        console.log(error);
+        throw new Error('Failed to fetch free WH Operators')
+    }
+}
+
 const insertSPK = async (userId, materialId,quantityOrder,penerima) => {
     try {
         const newSPK = await prisma.sPK.create({
@@ -91,5 +116,6 @@ module.exports = {
     findSpkByUser,
     findSpkById,
     findSpk,
-    updateSpkStatus
+    updateSpkStatus,
+    findFreeWHOperators
 }
