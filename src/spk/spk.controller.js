@@ -58,7 +58,9 @@ router.patch('/:id', adminAuthorization, async (req, res) => {
     try {
         const { id } = req.params;
         const { status } = req.body;
+        console.log(`ID ${id}, Status ${status}`)
         const updateSpk = await spkService.verifySPK(id, status);
+        console.log(updateSpk)
         res.status(200).json(updateSpk);
     } catch (e) {
         res.status(400).json({ message: e.message });

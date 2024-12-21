@@ -75,7 +75,7 @@ const verifySPK = async (spkId,status) =>{
     await spkRepository.updateSpkStatus(spkId, status, status === 'DONE' ? 'createdAt' : null)
 
     if(status === 'DONE'){
-        const material = await materialRepository.findMaterialById(material.materialId)
+        const material = await materialRepository.findMaterialById(spk.materialId)
         if(!material){
             throw new Error('material not found')
         }
@@ -84,8 +84,9 @@ const verifySPK = async (spkId,status) =>{
         if(newQuantity < 0){
             throw new Error('infsufficent quantity')
         }
-        await materialRepository.updateMaterialQuantity(material.materialId,newQuantity)
+        await materialRepository.updateMaterialQuantity(spk.materialId,newQuantity)
     }
+    return spk
 }
 
 
