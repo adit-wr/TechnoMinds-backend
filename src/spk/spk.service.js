@@ -1,5 +1,6 @@
 
 const spkRepository = require('./spk.repository')
+const materialRepository = require('../material/material.repository')
 
 getFreeWHOPerators = async()=>{
     const freeOperators = await spkRepository.findFreeWHOperators()
@@ -65,6 +66,28 @@ const updateStatusSpk = async (spkId, status) => {
     return updateSpk;
 };
 
+const verifySPK = async (spkId,status) =>{
+    const spk = await spkRepository.findSpkById(spkId)
+    if(!spk){
+        throw new Error('SPK by Id not found')
+    }
+
+    await spkRepository.updateSpkStatus(spkId, status, status === 'DONE' ? 'createdAt' : null)
+
+    if(status === 'DONE'){
+        const material = await materialRepository.findMaterialById(material.materialId)
+        if(!material){
+            throw new Error('material not found')
+        }
+
+        const newQuantity = material.quantity - spk.quantityOrder
+        if(newQuantity < 0){
+            throw new Error('infsufficent quantity')
+        }
+        await materialRepository.updateMaterialQuantity(material.materialId,newQuantity)
+    }
+}
+
 
 module.exports = {
     createSpk,
@@ -73,5 +96,6 @@ module.exports = {
     getAllSPK,
     updateStatusSpk,
     verifySpk,
-    getFreeWHOPerators
+    getFreeWHOPerators,
+    verifySPK
 }

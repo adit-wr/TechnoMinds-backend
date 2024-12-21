@@ -1,3 +1,4 @@
+const { parse } = require('dotenv');
 const prisma = require('../db')
 
 const findFreeWHOperators = async()=>{
@@ -25,6 +26,17 @@ const findFreeWHOperators = async()=>{
     }
 }
 
+const findMaterialById = async(materialId) =>{
+    return await prisma.material.findUnique({
+        where:{
+            materialId:parseInt(materialId)
+        }
+    })
+}
+
+// const insertSPK = async (req,res)=>{
+//     const { userId, materialId, quantityOrder, penerima } = req.body
+// }
 const insertSPK = async (userId, materialId,quantityOrder,penerima) => {
     try {
         const newSPK = await prisma.sPK.create({

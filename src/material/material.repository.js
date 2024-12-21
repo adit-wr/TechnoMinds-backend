@@ -49,10 +49,22 @@ async function deleteMaterial(id) {
     })
 }
 
+const updateMaterialQuantity = async(materialId, newQuantity) =>{
+    await prisma.material.update({
+        where:{
+            materialId:parseInt(materialId)
+        },
+        data:{
+            quantity:newQuantity
+        }
+    })
+}
+
 module.exports = {
     insertMaterial,
     findMaterials,
     findMaterialById,
     editMaterial,
-    deleteMaterial
+    deleteMaterial,
+    updateMaterialQuantity
 }
