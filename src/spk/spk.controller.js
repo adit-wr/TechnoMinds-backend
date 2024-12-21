@@ -24,7 +24,7 @@ router.post('/', authorizeJWT, async (req, res) => {
     }
 })
 
-router.get('/', adminAuthorization, async (req, res) => {
+router.get('/', authorizeJWT, async (req, res) => {
     try {
         const spk = await spkService.getAllSPK()
         res.status(200).json(spk)
@@ -54,7 +54,7 @@ router.get('/:id', authorizeJWT, async (req, res) => {
     }
 })
 
-router.patch('/:id', adminAuthorization, async (req, res) => {
+router.patch('/:id', authorizeJWT, async (req, res) => {
     try {
         const { id } = req.params;
         const { status } = req.body;
