@@ -4,7 +4,7 @@ const authorizeJWT = require('../middleware/authorizeJWT')
 const adminAuthorization = require('../middleware/adminAuthorization')
 const router = express.Router();
 
-router.post('/', adminAuthorization, async (req, res) => {
+router.post('/', authorizeJWT, async (req, res) => {
     try {
         const newMaterialData = req.body;
         const newMaterial = await createMaterial(newMaterialData);
@@ -33,7 +33,7 @@ router.get('/:id', authorizeJWT, async (req, res) => {
     }
 });
 
-router.put('/:id', adminAuthorization, async (req, res) => {
+router.put('/:id', authorizeJWT, async (req, res) => {
     try {
         const materialId = req.params.id;
         const materialData = req.body;
@@ -44,7 +44,7 @@ router.put('/:id', adminAuthorization, async (req, res) => {
     }
 });
 
-router.delete('/:id', adminAuthorization, async (req, res) => {
+router.delete('/:id', authorizeJWT, async (req, res) => {
     try {
         const materialId = req.params.id;
         await deleteMaterialById(materialId);
