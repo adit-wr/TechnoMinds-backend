@@ -1,6 +1,6 @@
 const prisma = require('../db')
 
-const insertSPK = async (userId, filematerialId,quantityOrder,penerima) => {
+const insertSPK = async (userId, materialId,quantityOrder,penerima) => {
     try {
         const newSPK = await prisma.sPK.create({
             data: {

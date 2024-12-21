@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const express = require('express')
 const app = express()
 const dotenv = require('dotenv')
@@ -8,18 +8,17 @@ const adminAuthorization = require('./middleware/adminAuthorization')
 const cors = require('cors')
 
 app.use(express.json())
-=======
-const express = require('express');
-const app = express();
-const dotenv = require('dotenv');
-dotenv.config();
-const PORT = process.env.PORT ;
-const adminAuthorization = require('./middleware/adminAuthorization');
-const cors = require('cors')
+
+// const express = require('express');
+// const app = express();
+// const dotenv = require('dotenv');
+// dotenv.config();
+// const PORT = process.env.PORT ;
+// const adminAuthorization = require('./middleware/adminAuthorization');
+// const cors = require('cors')
 
 // app.use('/uploads', express.static('uploads'))
 app.use(express.json());
->>>>>>> 67fb9165223ccde6c75dbce7d14927797c12a169
 app.use(cors())
 app.get('/', (res, req) => {
     console.log(tes)

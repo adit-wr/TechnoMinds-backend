@@ -9,7 +9,8 @@ const getnerateToken = async (user) => {
         userId: user.userId,
         username: user.username,
         email: user.email,
-        role: user.role
+        role: user.role,
+        status: user.status
     }, process.env.JWT_SECRET, { expiresIn: '1h' });
 };
 
