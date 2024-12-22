@@ -19,11 +19,12 @@ const authController = require('./auth/auth.controller')
 const materialController = require('./material/material.controller')
 const spkController = require('./spk/spk.controller')
 const userController = require('./user/user.controller')
+const authorizeJWT = require('./middleware/authorizeJWT')
 
 app.use('/api/auth', authController)
 app.use('/api/materials', materialController)
 app.use('/api/spk', spkController)
-app.use('/api/user', adminAuthorization, userController)
+app.use('/api/user', authorizeJWT, userController)
 
 // export default app;
 app.listen(PORT, () => {
