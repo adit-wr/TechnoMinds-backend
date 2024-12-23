@@ -44,7 +44,7 @@ const insertSPK = async (userId, materialId,quantityOrder,penerima) => {
                 userId,
                 materialId,
                 quantityOrder,
-                penerima,
+                penerima: penerima.toString(),
                 status: "PENDING",
                 tanggal_pengajuan : new Date()
             }
