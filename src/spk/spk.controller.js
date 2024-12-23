@@ -59,7 +59,7 @@ router.patch('/:id', authorizeJWT, async (req, res) => {
         const { id } = req.params;
         const { status } = req.body;
         console.log(`ID ${id}, Status ${status}`)
-        const updateSpk = await spkService.verifySPK(id, status);
+        const updateSpk = await spkService.verifySPK2(id, status);
         console.log(updateSpk)
         res.status(200).json(updateSpk);
     } catch (e) {

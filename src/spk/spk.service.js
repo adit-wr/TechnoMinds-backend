@@ -66,7 +66,7 @@ const updateStatusSpk = async (spkId, status) => {
     return updateSpk;
 };
 
-const verifySPK = async (spkId,status) =>{
+const verifySPK2 = async (spkId,status) =>{
     const spk = await spkRepository.findSpkById(spkId)
     if(!spk){
         throw new Error('SPK by Id not found')
@@ -98,5 +98,5 @@ module.exports = {
     updateStatusSpk,
     verifySpk,
     getFreeWHOPerators,
-    verifySPK
+    verifySPK2
 }
