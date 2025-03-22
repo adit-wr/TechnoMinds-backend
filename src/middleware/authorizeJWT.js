@@ -12,6 +12,7 @@ function authorizeJWT(req, res, next) {
         req.userId = decoded.userId
         next()
     } catch (error) {
+        console.log(token)
         return res.status(403).json({ message: 'autentikasi token gagal' })
     }
 }
